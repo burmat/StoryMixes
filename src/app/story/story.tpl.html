@@ -1,11 +1,11 @@
 <h1>{{ story.title }}</h1>
 
-<blockquote ng-repeat="page in breadcrumb_trail">
+<div ng-repeat="page in breadcrumb_trail" class="page">
 {{ current_page.text }}
-</blockquote>
+</div>
 
-<ul>
+<ul class="children_pages">
 	<li ng-repeat="child_page in current_page.children">
-		{{ child_page.teaser }}
+		<a ng-click="goto_child(child_page)">{{ child_page.teaser }}</a>
 	</li>
 </ul>
