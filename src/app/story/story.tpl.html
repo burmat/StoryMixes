@@ -1,0 +1,11 @@
+<h1>{{ story.title }}</h1>
+
+<blockquote ng-repeat="page in breadcrumb_trail">
+{{ current_page.text }}
+</blockquote>
+
+<ul>
+	<li ng-repeat="child_page in current_page.children">
+		{{ child_page.teaser }}
+	</li>
+</ul>
