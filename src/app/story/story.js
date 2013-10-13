@@ -132,8 +132,9 @@ angular.module( 'ngBoilerplate.story', [
     if (breadcrumb_trail.length <= 1) {
       return false;
     }
-    $scope.breadcrumb_trail = breadcrumb_trail.slice(0, breadcrumb_trail.length - 1);
-    $scope.current_page = page;
+    breadcrumb_trail.pop();
+    $scope.breadcrumb_trail = breadcrumb_trail;
+    $scope.current_page = $scope.breadcrumb_trail.slice(-1)[0];
     $scope.reload_children();
     return true;
   };
