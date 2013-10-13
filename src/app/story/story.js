@@ -15,7 +15,8 @@
 angular.module( 'ngBoilerplate.story', [
   'ui.state',
   'plusOne',
-  'user'
+  'user',
+  'focus'
 ])
 
 /**
@@ -68,7 +69,7 @@ angular.module( 'ngBoilerplate.story', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page ) {
+.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, focus ) {
   // $scope.params = $stateParams;
   // console.log($scope.params);
   var children = [
@@ -143,6 +144,7 @@ angular.module( 'ngBoilerplate.story', [
     new_page.author = 1;
     new_page.title = "heyo";
     $scope.new_page = new_page;
+    focus('focusMe');
   };
 
   $scope.mix_finished = function() {
