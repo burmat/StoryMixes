@@ -1,13 +1,19 @@
-<h1>{{ story.title }}</h1>
+<h1 class="center">{{ story.title }}</h1>
 
-<div ng-repeat="page in breadcrumb_trail" class="page">
-{{ current_page.text }}
+<div ng-repeat="page in breadcrumb_trail" class="row">
+  <div class="span8 offset2 page">
+    {{ current_page.text }}
+  </div>
+  <div class="span2">
+    <a ng-click="mix(page)"><span class="entypo">&#8627;</span> mix this</a>
+  </div>
 </div>
-
-<ul class="children_pages">
-	<li ng-repeat="child_page in current_page.children">
-		<a ng-click="goto_child(child_page)">{{ child_page.teaser }}</a>
-	</li>
-</ul>
-
-<button class="btn" ng-click="add_to(child_page)">Add your own mix</button>
+<div class="row">
+  <div class="span8 offset2">
+    <ul class="children_pages">
+    	<li ng-repeat="child_page in current_page.children">
+    		<a ng-click="goto_child(child_page)">{{ child_page.teaser }}</a>
+    	</li>
+    </ul>
+  </div>
+</div>

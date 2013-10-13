@@ -89,7 +89,7 @@ angular.module( 'ngBoilerplate.story', [
     console.log(child);
   };
   
-  $scope.add_to = function(child){
+  $scope.mix = function(page){
     
   };
 

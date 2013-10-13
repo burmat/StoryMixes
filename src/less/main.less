@@ -32,6 +32,7 @@
 
 @import 'variables.less';
 
+
 body, html {
 	background-color: #e1e1e1;
 }
@@ -46,6 +47,21 @@ body, html {
   font-style: normal;
   font-weight: 400;
   src: local('Roboto Regular'), local('Roboto-Regular'), url(fonts/Roboto-Regular.woff) format('woff');
+}
+@font-face {
+  font-family: 'Entypo';
+  font-style: normal;
+  font-weight: 400;
+	src: url("fonts/Entypo.eot");
+	src: local("Entypo"), local("Entypo"),
+		url("fonts/Entypo.woff") format("woff"),
+		url("fonts/Entypo.otf") format("opentype"),
+		url("fonts/Entypo.svg#Entypo") format("svg");
+}
+.entypo {
+  font-size: 2em;
+  line-height: .5em;
+  font-family: 'Entypo';
 }
 
 code, pre, .pre {
