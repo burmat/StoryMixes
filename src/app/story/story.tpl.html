@@ -21,7 +21,7 @@
     <a class="btn right" ng-click="mix()"><span class="entypo">&#8627;</span> Mix</a>
   </div>
   <div ng-show="is_editing_mode" class="span8 offset2">
-    <textarea type="text" ng-model="new_page.text"></textarea>
+    <textarea type="text" ng-model="new_page.text" focus-on="focusMe"></textarea>
     <button ng-click="mix_finished()">Add</button>
   </div>
 </div>
