@@ -14,7 +14,8 @@
  */
 angular.module( 'ngBoilerplate.story', [
   'ui.state',
-  'plusOne'
+  'plusOne',
+  'user'
 ])
 
 /**
@@ -45,10 +46,41 @@ angular.module( 'ngBoilerplate.story', [
   });
 })
 
+
+.factory( 'Story', function($resource) {
+  var resource = $resource('http://storymixes.com/api/story.php', {
+      id: '@id'
+    }, {
+  } );
+  return resource;
+})
+
+
+
+.factory( 'Page', function($resource) {
+  var resource = $resource('http://storymixes.com/api/pages.php', {
+      story_id: '@story_id'
+  }, {
+    root: {
+        method : 'GET'
+    },
+    children: {
+        method : 'GET',
+        isArray: true 
+    }
+  } );
+  resource.prototype.teaser = function() {
+    return this.text;
+  };
+  return resource;
+})
+
+
+
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope, $stateParams ) {
+.controller( 'StoryCtrl', function StoryCtrl( $scope, $stateParams, User, Story, Page ) {
   $scope.params = $stateParams;
   console.log($scope.params);
   var children = [
@@ -69,21 +101,43 @@ angular.module( 'ngBoilerplate.story', [
     }
   ];
 
-  $scope.story = {
-    author: 'Joe the Plumber',
-    title: "Joe's Awesome Story"
-  };
+  $scope.user = User.get();
 
-  $scope.root_page = {
-      text: 'Once upon a time there were three billy goats. Gruff.',
-      children: children
-  };
+  // var children = [
+  //   {
+  //     id:1,
+  //     teaser: 'Follow Little Billy.',
+  //     text: "I don't know what you did, Fry, but once again, you screwed up! Now all the planets are gonna start cracking wise about our mamas. It doesn't look so shiny to me. Kids have names? Son, as your lawyer, I declare y'all are in a 12-piece bucket o' trouble. But I done struck you a deal: Five hours of community service cleanin' up that ol' mess you caused. We're rescuing ya. I don't know what you did, Fry, but once again, you screwed up! Now all the planets are gonna start cracking wise about our mamas."
+  //   },
+  //   {
+  //     id:2,
+  //     teaser: 'Follow Middle Billy.',
+  //     text: "Say what? I barely knew Philip, but as a clergyman I have no problem telling his most intimate friends all about him. But I've never been to the moon! You guys go on without me! I'm going to go… look for more stuff to steal! Why, those are the Grunka-Lunkas! They work here in the Slurm factory. No, I'm Santa Claus!"
+  //   },
+  //   {
+  //     id:3,
+  //     teaser: 'Follow Great Big Billy Goat.',
+  //     text: "You guys go on without me! I'm going to go… look for more stuff to steal! Yeah, I do that with my stupidness. Son, as your lawyer, I declare y'all are in a 12-piece bucket o' trouble. But I done struck you a deal: Five hours of community service cleanin' up that ol' mess you caused. Oh, I don't have time for this. I have to go and buy a single piece of fruit with a coupon and then return it, making people wait behind me while I complain. All I want is to be a monkey of moderate intelligence who wears a suit… that's why I'm transferring to business school!"
+  //   }
+  // ];
 
-  $scope.current_page = $scope.root_page;
+  // $scope.story = {
+  //   author: 'Joe the Plumber',
+  //   title: "Joe's Awesome Story"
+  // };
+
+  $scope.story = Story.get({id: 1});
+
+  $scope.current_page = Page.root({story_id: 1}, function(root_page) {
+    $scope.current_page_children = Page.children({story_id: 1, page_id: root_page.id});
+  });
+
+  $scope.root_page = $scope.current_page;
 
   $scope.breadcrumb_trail = [
-    $scope.root_page
+    $scope.current_page
   ];
+  
   $scope.goto_child = function(child){
     //Go to the child page.
     console.log(child);
