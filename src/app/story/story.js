@@ -127,6 +127,17 @@ angular.module( 'ngBoilerplate.story', [
     return true;
   };
 
+  $scope.rewind_once = function() {
+    var breadcrumb_trail = $scope.breadcrumb_trail;
+    if (breadcrumb_trail.length <= 1) {
+      return false;
+    }
+    $scope.breadcrumb_trail = breadcrumb_trail.slice(0, breadcrumb_trail.length - 1);
+    $scope.current_page = page;
+    $scope.reload_children();
+    return true;
+  };
+
   $scope.mix = function(page) {
     authenticationService.then(function(service){
       if(service.require_logged_in('/story/'+$scope.story.id)){
