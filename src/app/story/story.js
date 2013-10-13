@@ -14,7 +14,8 @@
  */
 angular.module( 'ngBoilerplate.story', [
   'ui.state',
-  'plusOne'
+  'plusOne',
+  'user'
 ])
 
 /**
@@ -38,7 +39,9 @@ angular.module( 'ngBoilerplate.story', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope ) {
+.controller( 'StoryCtrl', function StoryCtrl( $scope, User ) {
+  $scope.user = User.get();
+
   var children = [
     {
       id:1,
