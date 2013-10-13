@@ -176,6 +176,10 @@ angular.module( 'ngBoilerplate.story', [
     });
   };
 
+  $scope.mix_canceled = function() {
+    $scope.is_editing_mode = false;
+  }
+
 })
 
 ;
