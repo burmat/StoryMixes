@@ -5,6 +5,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.about',
   'ngBoilerplate.story',
   'ui.state',
+  'monospaced.elastic',
   'ui.route'
 ])
 

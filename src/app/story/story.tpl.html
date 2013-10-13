@@ -1,9 +1,11 @@
-<h1 class="center">{{ story.title }}</h1>
-<h2>by {{ story.author }}</h2>
+<div class="center">
+  <h1>{{ story.title }}</h1>
+</div>
 
 <div ng-repeat="page in breadcrumb_trail" class="row">
   <div class="span8 offset2 page">
     {{ page.text }}
+    <div class="author">by {{ page.author }}</div>
   </div>
   <div class="span2">
     <ul class="actions">
@@ -18,10 +20,13 @@
     		<a ng-click="push_child(child_page)">{{ child_page.teaser() }}</a>
     	</li>
     </ul>
-    <a class="btn right" ng-click="mix()"><span class="entypo">&#8627;</span> Mix</a>
+    <button class="btn right" ng-click="mix()"><span class="entypo">&#8627;</span> Mix</button>
   </div>
   <div ng-show="is_editing_mode" class="span8 offset2">
-    <textarea type="text" ng-model="new_page.text" focus-on="focusMe"></textarea>
-    <button ng-click="mix_finished()" class="btn_right">Add</button>
+    <div class="page">
+      <textarea type="text" ng-model="new_page.text" msd-elastic focus-on="focusMe"></textarea>
+      <div class="author">by {{ user.fname }} {{ user.lname }}</div>
+    </div>
+    <button ng-click="mix_finished()" class="btn right"><span class="entypo">&#8627;</span> Add Mix</button>
   </div>
 </div>
