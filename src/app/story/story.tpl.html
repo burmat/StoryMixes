@@ -9,6 +9,7 @@
   </div>
   <div class="span2">
     <ul class="actions">
+      <li><a ng-click="love(page)" ng-hide="page.loved"><span class="entypo">&#9825;</span> Love</a><a ng-click"love(page)" ng-show="page.loved"><span class="entypo">&hearts;</span> Loved</a></li>
       <li><a ng-click="mix(page)"><span class="entypo">&#8627;</span> Mix</a></li>
     </ul>
   </div>
@@ -27,6 +28,7 @@
       <textarea type="text" ng-model="new_page.text" msd-elastic focus-on="focusMe"></textarea>
       <div class="author">by {{ user.fname }} {{ user.lname }}</div>
     </div>
-    <button ng-click="mix_finished()" class="btn right"><span class="entypo">&#8627;</span> Add Mix</button>
+    <button ng-click="mix_cancel()" class="btn right"><span class="entypo">&#10006;</span> Cancel</button>
+    <button ng-click="mix_finished()" class="btn right"><span class="entypo">&#128228;</span> Add Mix</button>
   </div>
 </div>

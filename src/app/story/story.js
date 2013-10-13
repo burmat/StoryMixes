@@ -175,6 +175,7 @@ angular.module( 'ngBoilerplate.story', [
       $scope.push_child(new_page);
     });
   };
+  
 
   $scope.mix_canceled = function() {
     $scope.is_editing_mode = false;
