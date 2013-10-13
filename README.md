@@ -13,9 +13,15 @@ Setting up a development environment
         $ npm install
         $ bower install
 
-3. Start the build system:
+To build and view your changes
+------------------------------
 
-        $ grunt watch
+        $ rake build && rake serve
+
+
+        [http://localhost:8000/](http://localhost:8000/)
+
+
 
 
 Deployment

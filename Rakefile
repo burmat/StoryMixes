@@ -6,6 +6,12 @@ task :build do
 end
 
 
+desc "Start a local web server"
+task :serve do
+	raise unless system("(cd build && node ../server/web-server.js)")
+end
+
+
 desc "Deploy everything to the app/ folder on the server"
 task :deploy => [
 	:build
