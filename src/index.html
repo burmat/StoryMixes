@@ -31,7 +31,7 @@
     </script>
   </head>
   <body>
-    <header id="nav">
+    <header id="nav" ng-controller="RootCtrl">
       <div class="container">
         <div class="masthead row">
             <div class="navbar">
@@ -39,25 +39,26 @@
                 <div class="container">
                   <ul class="nav">
                     <li class="brand" ui-route="/home"><a href="#/"><img src="assets/logo.png"/></a></li>
-                    <li ui-route="/story/" ng-show="user">
+                    {{authenticationService.is_signed_in}}
+                    <li ui-route="/story/" ng-show="authenticationService.is_signed_in()">
                       <a href="#/story/">
                         <span class="entypo">&#128213;</span>
                         Create
                       </a>
                     </li>
-                    <li ui-route="/logout" ng-show="user">
+                    <li ui-route="/logout" ng-show="authenticationService.is_signed_in()">
                       <a href="#/logout">
                         <span class="entypo">&#59201;</span>
                         Logout
                       </a>
                     </li>
-                    <li ui-route="/login" ng-hide="user">
+                    <li ui-route="/login" ng-hide="authenticationService.is_signed_in()">
                       <a href="#/login">
                         <span class="entypo">&#59200;</span>
                         Login
                       </a>
                     </li>
-                    <li ui-route="/register" ng-hide="user">
+                    <li ui-route="/register" ng-hide="authenticationService.is_signed_in()">
                       <a href="#/register">
                         <span class="entypo">&#59136;</span>
                         Register

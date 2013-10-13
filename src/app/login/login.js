@@ -48,16 +48,12 @@ angular.module( 'ngBoilerplate.login', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'LoginCtrl', function LoginCtrl( $scope, $rootScope, Login, $location, User ) {
+.controller( 'LoginCtrl', function LoginCtrl( $scope, $rootScope, Login, authenticationService, $location, User ) {
   //var story_id = $stateParams['id'];
   $scope.new_login = new Login();
   
   $scope.send_login = function() {
-    $scope.new_login.$save(function(result) {
-      $rootScope.user = User.get();
-      
-      $location.path('/home');
-    });
+    authenticationService.login($scope.new_login);
   };
 
 })
