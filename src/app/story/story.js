@@ -74,7 +74,7 @@ angular.module( 'ngBoilerplate.story', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, Love, focus, $stateParams ) {
+.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, Love, focus, $stateParams, $location ) {
 
   $scope.user = User.get();
 
@@ -90,11 +90,22 @@ angular.module( 'ngBoilerplate.story', [
     ];
   } else {
     $scope.new_story = new Story();
+    $scope.new_page = new Page(); 
   }
+  
+  $scope.finish_create_story = function() {
+    $scope.new_story.$save(function(result) {
+      $scope.new_page.id_parent = 0;
+      $scope.new_page.id_story = result.story_id;
+      $scope.new_page.$save(function() {
+        $location.path('/story/'+result.story_id);
+      });
+    });
+  };
 
   $scope.reload_children = function() {
     $scope.current_page_children = [];
-    $scope.current_page_children = Page.children({story_id: 1, page_id: $scope.current_page.id});
+    $scope.current_page_children = Page.children({story_id: story_id, page_id: $scope.current_page.id});
   };
   
   $scope.push_child = function(child) {
@@ -147,12 +158,10 @@ angular.module( 'ngBoilerplate.story', [
   };
   
   $scope.love = function(page, bool){
-    console.log(page, bool);
     var love = new Love();
     love.section_id = page.id;
     love.loved = bool;
     love.$save(function (result){
-      console.log(result);
       page.loved = bool;
     });
   };

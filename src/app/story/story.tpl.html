@@ -1,34 +1,46 @@
-<div class="center">
-  <h1>{{ story.title }}</h1>
-</div>
-
-<div ng-repeat="page in breadcrumb_trail" class="row">
-  <div class="span8 offset2 page">
-    {{ page.text }}
-    <div class="author">by {{ page.author }}</div>
+<div ng-hide="new_story">
+  <div class="center">
+    <h1>{{ story.title }}</h1>
   </div>
-  <div class="span2">
-    <ul class="actions">
-      <li><a ng-click="love(page, true)" ng-hide="page.loved"><span class="entypo">&#9825;</span> Love</a><a ng-click="love(page, false)" ng-show="page.loved"><span class="entypo">&hearts;</span> Loved</a></li>
-      <li><a ng-click="mix(page)"><span class="entypo">&#8627;</span> Mix</a></li>
-    </ul>
-  </div>
-</div>
-<div class="row">
-  <div ng-hide="is_editing_mode" class="span8 offset2 children">
-    <ul class="children_pages">
-    	<li ng-repeat="child_page in current_page_children">
-    		<a ng-click="push_child(child_page)">{{ child_page.teaser() }}</a>
-    	</li>
-    </ul>
-    <button class="btn right" ng-click="mix()"><span class="entypo">&#8627;</span> Mix</button>
-  </div>
-  <div ng-show="is_editing_mode" class="span8 offset2">
-    <div class="page">
-      <textarea type="text" ng-model="new_page.text" msd-elastic focus-on="focusMe"></textarea>
-      <div class="author">by {{ user.fname }} {{ user.lname }}</div>
+  
+  <div ng-repeat="page in breadcrumb_trail" class="row">
+    <div class="span8 offset2 page">
+      {{ page.text }}
+      <div class="author">by {{ page.author }}</div>
     </div>
-    <button ng-click="mix_cancel()" class="btn right"><span class="entypo">&#10006;</span> Cancel</button>
-    <button ng-click="mix_finished()" class="btn right"><span class="entypo">&#128228;</span> Add Mix</button>
+    <div class="span2">
+      <ul class="actions">
+        <li><a ng-click="love(page, true)" ng-hide="page.loved"><span class="entypo">&#9825;</span> Love</a><a ng-click="love(page, false)" ng-show="page.loved"><span class="entypo">&hearts;</span> Loved</a></li>
+        <li><a ng-click="mix(page)"><span class="entypo">&#8627;</span> Mix</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div ng-hide="is_editing_mode" class="span8 offset2 children">
+      <ul class="children_pages">
+      	<li ng-repeat="child_page in current_page_children">
+      		<a ng-click="push_child(child_page)">{{ child_page.teaser() }}</a>
+      	</li>
+      </ul>
+      <button class="btn right" ng-click="mix()"><span class="entypo">&#8627;</span> Mix</button>
+    </div>
+    <div ng-show="is_editing_mode" class="span8 offset2">
+      <div class="page">
+        <textarea type="text" ng-model="new_page.text" msd-elastic focus-on="focusMe"></textarea>
+        <div class="author">by {{ user.fname }} {{ user.lname }}</div>
+      </div>
+      <button ng-click="mix_finished()" class="btn right"><span class="entypo">&#128228;</span> Add Mix</button>
+      <button ng-click="mix_cancel()" class="btn right"><span class="entypo">&#10006;</span> Cancel</button>
+    </div>
+  </div>
+</div>
+<div ng-show="new_story" class="row new_story">
+  <div class="center title"><input ng-model="new_story.title"/></div>
+  <div class="span8 offset2">
+    <div class="page">
+     <textarea ng-model="new_page.text" msd-elastic></textarea>
+     <div class="author">by {{ user.fname }} {{ user.lname }}</div>
+    </div>
+    <button class="btn right" ng-click="finish_create_story()"><span class="entypo">&#128213;</span> Create Story</button>
   </div>
 </div>
