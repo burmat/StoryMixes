@@ -74,7 +74,7 @@ angular.module( 'ngBoilerplate.story', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope, $rootScope, User, Story, Page, Love, focus, $stateParams, $location ) {
+.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, Love, focus, $stateParams, $location, authenticationService ) {
 
   var story_id = $stateParams['id'];
   if (story_id) {
@@ -128,20 +128,24 @@ angular.module( 'ngBoilerplate.story', [
   };
 
   $scope.mix = function(page) {
-    // if a page is specified, rewind until we reaach it
-    if (page) {
-      if (! $scope.rewind(page)) {
-        return;
+    authenticationService.then(function(service){
+      if(service.require_logged_in('/story/'+$scope.story.id)){
+        // if a page is specified, rewind until we reaach it
+        if (page) {
+          if (! $scope.rewind(page)) {
+            return;
+          }
+        }
+        $scope.is_editing_mode = true;
+        var new_page = new Page();
+        new_page.id_story = $scope.story.id;
+        new_page.id_parent = $scope.current_page.id;
+        new_page.author = 1;
+        new_page.title = "heyo";
+        $scope.new_page = new_page;
+        focus('focusMe');
       }
-    }
-    $scope.is_editing_mode = true;
-    var new_page = new Page();
-    new_page.id_story = $scope.story.id;
-    new_page.id_parent = $scope.current_page.id;
-    new_page.author = 1;
-    new_page.title = "heyo";
-    $scope.new_page = new_page;
-    focus('focusMe');
+    });
   };
 
   $scope.mix_finished = function() {
@@ -157,11 +161,15 @@ angular.module( 'ngBoilerplate.story', [
   };
   
   $scope.love = function(page, bool){
-    var love = new Love();
-    love.section_id = page.id;
-    love.loved = bool;
-    love.$save(function (result){
-      page.loved = bool;
+    authenticationService.then(function(service){
+      if(service.require_logged_in('/story/'+$scope.story.id)){
+        var love = new Love();
+        love.section_id = page.id;
+        love.loved = bool;
+        love.$save(function (result){
+          page.loved = bool;
+        });
+      }
     });
   };
 

@@ -1,15 +1,15 @@
 <div class="row">
   <h1>This is how the story grows.</h1>
   <div class="span9">
-    
+    Storymixes is collaborative storytelling for the digital era. Write a new story, explore other creations, or mix it up and build off another story to create something completely new! Share your masterpiece with your friends, your kids, the world.
   </div>
   <div class="span3">
     
   </div>
 </div>
 <div id="trending" class="row">
-  <h2>Stories</h2>
+  <h3>Stories</h3>
   <div class="story-wrapper">
-    <article ng-repeat="story in stories" class="span4 card"><div class="cover"></div><a href="#/story/{{ story.story_id }}">{{ story.title }}</a></article>
+    <article ng-repeat="story in stories" class="span4 card"><a href="#/story/{{ story.story_id }}"><div class="cover"></div><div class="title">{{ story.title }}</div></a></article>
   </div>
 </div>
