@@ -38,11 +38,29 @@
               <div class="navbar-inner">
                 <div class="container">
                   <ul class="nav">
-                    <li class="brand" ui-route="/home"><img src="assets/logo.png"/></li>
-                    <li ui-route="/story/">
+                    <li class="brand" ui-route="/home"><a href="#/"><img src="assets/logo.png"/></a></li>
+                    <li ui-route="/story/" ng-show="user">
                       <a href="#/story/">
-                        <span class="icon-plus-sign"></span>
+                        <span class="entypo">&#128213;</span>
                         Create
+                      </a>
+                    </li>
+                    <li ui-route="/logout" ng-show="user">
+                      <a href="#/logout">
+                        <span class="entypo">&#59201;</span>
+                        Logout
+                      </a>
+                    </li>
+                    <li ui-route="/login" ng-hide="user">
+                      <a href="#/login">
+                        <span class="entypo">&#59200;</span>
+                        Login
+                      </a>
+                    </li>
+                    <li ui-route="/register" ng-hide="user">
+                      <a href="#/register">
+                        <span class="entypo">&#59136;</span>
+                        Register
                       </a>
                     </li>
                   </ul>

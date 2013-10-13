@@ -74,9 +74,7 @@ angular.module( 'ngBoilerplate.story', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, Love, focus, $stateParams, $location ) {
-
-  $scope.user = User.get();
+.controller( 'StoryCtrl', function StoryCtrl( $scope, $rootScope, User, Story, Page, Love, focus, $stateParams, $location ) {
 
   var story_id = $stateParams['id'];
   if (story_id) {
@@ -153,7 +151,7 @@ angular.module( 'ngBoilerplate.story', [
   };
   
 
-  $scope.mix_canceled = function() {
+  $scope.mix_cancel = function() {
     $scope.is_editing_mode = false;
   };
   

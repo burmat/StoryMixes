@@ -39,39 +39,5 @@ angular.module( 'ngBoilerplate.home', [
  * And of course we define a controller for our route.
  */
 .controller( 'HomeCtrl', function HomeController( $scope ) {
-  $scope.trending = {
-    quantity:3,
-    stories:[
-      {
-        id:1,
-        title:"Once upon a time.",
-        text:"Once upon a time there were three billy goats. Gruff."
-      },
-      {
-        id:2,
-        title:"Test story 2",
-        text:"George walked outside."
-      },
-      {
-        id:3,
-        title:"Test story 3",
-        text:"George walked outside."
-      },
-      {
-        id:4,
-        title:"Test story 4",
-        text:"George walked outside."
-      },
-      {
-        id:5,
-        title:"Test story 5",
-        text:"George walked outside."
-      },
-      {
-        id:6,
-        title:"Test story 6",
-        text:"George walked outside."
-      }
-    ]
-  };
+  $scope.quantity = 4;
 });
