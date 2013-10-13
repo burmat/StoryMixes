@@ -48,9 +48,7 @@ angular.module( 'ngBoilerplate.story', [
 
 
 .factory( 'Page', function($resource) {
-  var resource = $resource('http://storymixes.com/api/pages.php', {
-      story_id: '@story_id'
-  }, {
+  var resource = $resource('http://storymixes.com/api/pages.php', {}, {
     root: {
         method : 'GET'
     },
@@ -134,9 +132,22 @@ angular.module( 'ngBoilerplate.story', [
     $scope.current_page_children = [];
     $scope.current_page_children = Page.children({story_id: 1, page_id: child.id});
   };
+
+  $scope.is_editing_mode = false;
   
-  $scope.mix = function(page){
-    
+  $scope.mix = function() {
+    $scope.is_editing_mode = true;
+    var new_page = new Page();
+    new_page.id_story = $scope.story.id;
+    new_page.id_parent = $scope.current_page.id;
+    new_page.author = 1;
+    new_page.title = "heyo";
+    $scope.new_page = new_page;
+  };
+
+  $scope.mix_finished = function() {
+    console.log($scope.new_page);
+    $scope.new_page.$save();
   };
 
 })
