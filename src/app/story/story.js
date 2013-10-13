@@ -147,10 +147,12 @@ angular.module( 'ngBoilerplate.story', [
   };
   
   $scope.love = function(page, bool){
+    console.log(page, bool);
     var love = new Love();
-    love.page_id = page.id;
+    love.section_id = page.id;
     love.loved = bool;
     love.$save(function (result){
+      console.log(result);
       page.loved = bool;
     });
   };
