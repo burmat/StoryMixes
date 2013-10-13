@@ -26,7 +26,7 @@ angular.module( 'ngBoilerplate.story', [
  */
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'story', {
-    url: '/story',
+    url: '/story/:id',
     views: {
       "main": {
         controller: 'StoryCtrl',
@@ -74,11 +74,11 @@ angular.module( 'ngBoilerplate.story', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, Love, focus, $routeParams ) {
+.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, Love, focus, $stateParams ) {
 
   $scope.user = User.get();
 
-  var story_id = $routeParams['id'];
+  var story_id = $stateParams['id'];
   if (story_id) {
     $scope.story = Story.get({id: story_id});
     $scope.current_page = Page.root({story_id: story_id}, function(root_page) {
