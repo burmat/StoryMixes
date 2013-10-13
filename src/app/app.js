@@ -8,6 +8,11 @@ angular.module( 'ngBoilerplate', [
   'ui.route'
 ])
 
+// Disable cors
+.config( function($httpProvider) {
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+})
+
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
   $urlRouterProvider.otherwise( '/home' );
 })
