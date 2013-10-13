@@ -74,7 +74,7 @@ angular.module( 'ngBoilerplate.story', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, Love, focus, $stateParams, $location, authenticationService ) {
+.controller( 'StoryCtrl', function StoryCtrl( $scope, $rootScope, User, Story, Page, Love, focus, $stateParams, $location, authenticationService ) {
 
   var story_id = $stateParams['id'];
   if (story_id) {
@@ -140,7 +140,8 @@ angular.module( 'ngBoilerplate.story', [
 
   $scope.mix = function(page) {
     authenticationService.then(function(service){
-      if(service.require_logged_in('/story/'+$scope.story.id)){
+      var redirect_to = '/story/'+$scope.story.id;
+      if(service.require_logged_in(redirect_to)){
         // if a page is specified, rewind until we reaach it
         if (page) {
           if (! $scope.rewind(page)) {
@@ -173,7 +174,8 @@ angular.module( 'ngBoilerplate.story', [
   
   $scope.love = function(page, bool){
     authenticationService.then(function(service){
-      if(service.require_logged_in('/story/'+$scope.story.id)){
+      var redirect_to = '/story/'+$scope.story.id;
+      if(service.require_logged_in(redirect_to)){
         var love = new Love();
         love.section_id = page.id;
         love.loved = bool;

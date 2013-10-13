@@ -46,7 +46,8 @@ angular.module( 'user', ['ngResource'] )
                 if (current_user) {
                     return true;
                 }
-                $location.path('/login?redirect_to' + redirect_to);
+                $location.path('/login');
+                $location.search('redirect_to', redirect_to);
                 return false;
             }
         };
