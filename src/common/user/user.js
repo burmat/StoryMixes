@@ -7,7 +7,7 @@ angular.module( 'user', ['ngResource'] )
 })
 
 
-.factory( 'authenticationService', function($q, $resource, User) {
+.factory( 'authenticationService', function($q, $resource, User, $location) {
 
     var service_with_initial_user = function(initial_user) {
         var current_user = initial_user;
@@ -23,20 +23,18 @@ angular.module( 'user', ['ngResource'] )
             // check password on server, get user data, unique token, etc.
             sign_out: function() {
                 // clear current_user data, unset logged in status, etc.
-                var Resource = $resource('http://storymixes.com/logout.php');
+                var Resource = $resource('http://storymixes.com/api/logout.php');
                 var logout = new Resource();
                 logout.$save(function() {
-                    current_user = {};
+                    current_user = null;
+                    $location.path('/home');
                 });
             },
             is_signed_in: function() {
-                console.log('is_signed_in');
                 // logic to check if current user has signed in
                 if (current_user) {
-                    console.log(true);
                     return true;
                 } else {
-                    console.log(false);
                     return false;
                 }
             },
@@ -50,6 +48,9 @@ angular.module( 'user', ['ngResource'] )
     var deferred = $q.defer();
 
     User.get({}, function(user) {
+        if (user.is_auth === 0) {
+            user = null;
+        }
         var service = service_with_initial_user(user);
         deferred.resolve(service);
     }, function() {

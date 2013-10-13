@@ -52,11 +52,9 @@ angular.module( 'ngBoilerplate.logout', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'LogoutCtrl', function LogoutCtrl( $scope, $rootScope, Logout, $location, User ) {
-  //var story_id = $stateParams['id'];
-  Logout.root(function(root_page) {
-      $rootScope.user = new User();
-      $location.path('/home');
+.controller( 'LogoutCtrl', function LogoutCtrl( $scope, authenticationService ) {
+  authenticationService.then(function(service) {
+    service.sign_out();
   });
 
 })

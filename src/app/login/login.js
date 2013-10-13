@@ -53,7 +53,9 @@ angular.module( 'ngBoilerplate.login', [
   $scope.new_login = new Login();
   
   $scope.send_login = function() {
-    authenticationService.login($scope.new_login);
+    authenticationService.then(function(service) {
+      service.sign_in($scope.new_login);
+    });
   };
 
 })
