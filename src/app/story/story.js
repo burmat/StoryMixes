@@ -33,12 +33,24 @@ angular.module( 'ngBoilerplate.story', [
     },
     data:{ pageTitle: 'This here. My Story' }
   });
+  $stateProvider.state( 'story.detail', {
+    url: '/story/:id',
+    views: {
+      "main": {
+        controller: 'StoryCtrl',
+        templateUrl: 'story/story.tpl.html'
+      }
+    },
+    data:{ pageTitle: 'This here. My Story' }
+  });
 })
 
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope ) {
+.controller( 'StoryCtrl', function StoryCtrl( $scope, $stateParams ) {
+  $scope.params = $stateParams;
+  console.log($scope.params);
   var children = [
     {
       id:1,
@@ -75,6 +87,10 @@ angular.module( 'ngBoilerplate.story', [
   $scope.goto_child = function(child){
     //Go to the child page.
     console.log(child);
+  };
+  
+  $scope.add_to = function(child){
+    
   };
 
 })
