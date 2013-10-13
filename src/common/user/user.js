@@ -12,11 +12,11 @@ angular.module( 'user', ['ngResource'] )
     var service_with_initial_user = function(initial_user) {
         var current_user = initial_user;
         return {
-            sign_in: function(login) {
+            sign_in: function(login, redirect_to) {
                 login.$save(function(result) {
                     User.get({}, function(user) {
                         current_user = user;
-                        $location.path('/home');
+                        $location.path(redirect_to ? redirect_to : '/home');
                     });
                 });
             },
