@@ -12,7 +12,7 @@
   </div>
 </div>
 <div class="row">
-  <div ng-hide="is_editing_mode" class="span8 offset2">
+  <div ng-hide="is_editing_mode" class="span8 offset2 children">
     <ul class="children_pages">
     	<li ng-repeat="child_page in current_page_children">
     		<a ng-click="push_child(child_page)">{{ child_page.teaser() }}</a>
@@ -22,6 +22,6 @@
   </div>
   <div ng-show="is_editing_mode" class="span8 offset2">
     <textarea type="text" ng-model="new_page.text" focus-on="focusMe"></textarea>
-    <button ng-click="mix_finished()">Add</button>
+    <button ng-click="mix_finished()" class="btn_right">Add</button>
   </div>
 </div>

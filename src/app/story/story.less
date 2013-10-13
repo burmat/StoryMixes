@@ -2,7 +2,7 @@ h1 {
   padding: 30px;
 }
 .page {
-	background: #ffffff;
+	background: @display_bg;
 	box-sizing: border-box;
 	padding: 30px;
 	border-bottom: 3px solid #ccc;
@@ -20,7 +20,7 @@ h1 {
 		a {
 			display: block;
 			box-sizing: border-box;
-			background: #ffffff;
+			background: @display_bg;
 			padding: 10px;
 			border-bottom: 3px solid #ccc;
 		}
@@ -32,10 +32,9 @@ h1 {
 }
 .right {
   float: right;
-  
-  &.btn {
-    margin-right: 20px;
-  }
+}
+.children .btn {
+  margin-right: 20px;
 }
 ul.actions {
   list-style: none;
@@ -47,5 +46,23 @@ ul.actions {
       display: block;
       padding: 10px;
     }
+  }
+}
+
+textarea {
+  font-family: @sansFontFamily;
+  border: 0;
+  box-sizing: border-box;
+  padding: 30px;
+  font-size: 2.5em;
+  line-height: 1.5;
+  background: @display_bg;
+  height: 10em;
+  width: 100%;
+  border-bottom: 3px solid #ccc;
+  margin-bottom: 20px;
+  &:focus {
+    outline:none;
+    -moz-appearance:none;
   }
 }
