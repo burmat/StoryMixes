@@ -148,8 +148,10 @@ angular.module( 'ngBoilerplate.story', [
   };
 
   $scope.mix_finished = function() {
-    console.log($scope.new_page);
-    $scope.new_page.$save();
+    $scope.new_page.$save(function(new_page) {
+      $scope.is_editing_mode = false;
+      $scope.push_child(new_page);
+    });
   };
 
 })
