@@ -118,7 +118,7 @@ angular.module( 'ngBoilerplate.story', [
   $scope.story = Story.get({id: 1});
 
   $scope.current_page = Page.root({story_id: 1}, function(root_page) {
-    $scope.current_page_children = Page.children({story_id: 1, page_id: root_page.id});
+    $scope.reload_children();
   });
 
   $scope.root_page = $scope.current_page;
@@ -126,17 +126,39 @@ angular.module( 'ngBoilerplate.story', [
   $scope.breadcrumb_trail = [
     $scope.current_page
   ];
+
+  $scope.reload_children = function() {
+    $scope.current_page_children = [];
+    $scope.current_page_children = Page.children({story_id: 1, page_id: $scope.current_page.id});
+  };
   
-  $scope.push_child = function(child){
+  $scope.push_child = function(child) {
     $scope.breadcrumb_trail.push(child);
     $scope.current_page = child;
-    $scope.current_page_children = [];
-    $scope.current_page_children = Page.children({story_id: 1, page_id: child.id});
+    $scope.reload_children();
   };
 
   $scope.is_editing_mode = false;
-  
-  $scope.mix = function() {
+
+  $scope.rewind = function(page) {
+    var breadcrumb_trail = $scope.breadcrumb_trail;
+    var index = $scope.breadcrumb_trail.indexOf(page);
+    if (index === -1) {
+      return false;
+    }
+    $scope.breadcrumb_trail = breadcrumb_trail.slice(0, index + 1);
+    $scope.current_page = page;
+    $scope.reload_children();
+    return true;
+  };
+
+  $scope.mix = function(page) {
+    // if a page is specified, rewind until we reaach it
+    if (page) {
+      if (! $scope.rewind(page)) {
+        return;
+      }
+    }
     $scope.is_editing_mode = true;
     var new_page = new Page();
     new_page.id_story = $scope.story.id;
