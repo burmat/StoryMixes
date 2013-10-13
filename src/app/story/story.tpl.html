@@ -6,7 +6,9 @@
     {{ current_page.text }}
   </div>
   <div class="span2">
-    <a ng-click="mix(page)"><span class="entypo">&#8627;</span> mix this</a>
+    <ul class="actions">
+      <li><a ng-click="mix(page)"><span class="entypo">&#8627;</span> mix this</a></li>
+    </ul>
   </div>
 </div>
 <div class="row">
@@ -16,4 +18,6 @@
     		<a ng-click="goto_child(child_page)">{{ child_page.teaser() }}</a>
     	</li>
     </ul>
+    <a class="btn right"><span class="entypo">&#8627;</span> mix this</a></a>
   </div>
+</div>
