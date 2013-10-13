@@ -80,6 +80,22 @@ a {
   font-family: 'Entypo';
 }
 
+input, textarea, select {
+  font-family: @sansFontFamily;
+  &:focus {
+    outline:none;
+    -moz-appearance:none;
+  }
+}
+.page {
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    border: 0;
+    border-bottom: 3px solid @inactive;
+  }
+}
+
 code, pre, .pre {
   padding: 5px;
   margin: 10px 0;

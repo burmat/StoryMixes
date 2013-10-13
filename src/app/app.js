@@ -4,6 +4,8 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.home',
   'ngBoilerplate.about',
   'ngBoilerplate.story',
+  'ngBoilerplate.login',
+  'ngBoilerplate.logout',
   'ui.state',
   'monospaced.elastic',
   'ui.route'

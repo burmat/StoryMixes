@@ -12,7 +12,7 @@
  * The dependencies block here is also where component dependencies should be
  * specified, as shown below.
  */
-angular.module( 'ngBoilerplate.login', [
+angular.module( 'ngBoilerplate.logout', [
   'ui.state',
   'plusOne',
   'user'
@@ -24,22 +24,26 @@ angular.module( 'ngBoilerplate.login', [
  * this way makes each module more "self-contained".
  */
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'login', {
-    url: '/login',
+  $stateProvider.state( 'logout', {
+    url: '/logout',
     views: {
       "main": {
-        controller: 'LoginCtrl',
-        templateUrl: 'login/login.tpl.html'
+        controller: 'LogoutCtrl',
+        templateUrl: 'logout/logout.tpl.html'
       }
     },
-    data:{ pageTitle: 'Login to StoryMixes' }
+    data:{ pageTitle: 'Logout from StoryMixes' }
   });
 })
 
 
 
-.factory( 'Login', function($resource) {
-  var resource = $resource('http://storymixes.com/api/login.php');
+.factory( 'Logout', function($resource) {
+  var resource = $resource('http://storymixes.com/api/logout.php', {}, {
+    root: {
+        method : 'GET'
+    }
+  } );
   return resource;
 })
 
@@ -48,15 +52,11 @@ angular.module( 'ngBoilerplate.login', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'LoginCtrl', function LoginCtrl( $scope, Login, $location ) {
+.controller( 'LogoutCtrl', function LogoutCtrl( $scope, Logout, $location ) {
   //var story_id = $stateParams['id'];
-  $scope.new_login = new Login();
-  
-  $scope.send_login = function() {
-    $scope.new_login.$save(function(result) {
+  Logout.root(function(root_page) {
       $location.path('/home');
-    });
-  };
+  });
 
 })
 
