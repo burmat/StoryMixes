@@ -1,6 +1,15 @@
+<div class="row">
+  <h1>This is how the story grows.</h1>
+  <div class="span9">
+    
+  </div>
+  <div class="span3">
+    
+  </div>
+</div>
 <div id="trending" class="row">
-  <h1>Stories</h1>
+  <h2>Stories</h2>
   <div class="story-wrapper">
-    <article ng-repeat="story in stories" class="span4 card"><a href="#/story/{{ story.story_id }}">{{ story.title }}</a></article>
+    <article ng-repeat="story in stories" class="span4 card"><div class="cover"></div><a href="#/story/{{ story.story_id }}">{{ story.title }}</a></article>
   </div>
 </div>
