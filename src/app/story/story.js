@@ -74,21 +74,23 @@ angular.module( 'ngBoilerplate.story', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, Love, focus ) {
+.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page, Love, focus, $routeParams ) {
 
   $scope.user = User.get();
 
-  $scope.story = Story.get({id: 1});
-
-  $scope.current_page = Page.root({story_id: 1}, function(root_page) {
-    $scope.reload_children();
-  });
-
-  $scope.root_page = $scope.current_page;
-
-  $scope.breadcrumb_trail = [
-    $scope.current_page
-  ];
+  var story_id = $routeParams['id'];
+  if (story_id) {
+    $scope.story = Story.get({id: story_id});
+    $scope.current_page = Page.root({story_id: story_id}, function(root_page) {
+      $scope.reload_children();
+    });
+    $scope.root_page = $scope.current_page;
+    $scope.breadcrumb_trail = [
+      $scope.current_page
+    ];
+  } else {
+    $scope.new_story = new Story();
+  }
 
   $scope.reload_children = function() {
     $scope.current_page_children = [];
