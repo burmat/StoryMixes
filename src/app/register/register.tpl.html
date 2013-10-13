@@ -1,0 +1,12 @@
+<div class="row">
+  <form class="span6 offset3" ng-submit="send_register()">
+    <h1>Register</h1>
+    <div class="page">
+      <input ng-model="new_register.fname" type="text" placeholder="first name"/>
+      <input ng-model="new_register.lname" type="text" placeholder="last name"/>
+      <input ng-model="new_register.email" type="email" placeholder="email"/>
+      <input ng-model="new_register.password" type="password" placeholder="password"/>
+    </div>
+    <button class="btn right" ng-click="send_register()"><span class="entypo">&#59136;</span> Register</button>
+  </form>
+</div>

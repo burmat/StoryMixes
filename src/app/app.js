@@ -6,6 +6,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.story',
   'ngBoilerplate.login',
   'ngBoilerplate.logout',
+  'ngBoilerplate.register',
   'ui.state',
   'monospaced.elastic',
   'ui.route'
