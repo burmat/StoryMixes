@@ -49,12 +49,12 @@ angular.module( 'ngBoilerplate.login', [
  * And of course we define a controller for our route.
  */
 .controller( 'LoginCtrl', function LoginCtrl( $scope, $rootScope, Login, authenticationService, $location, User ) {
-  //var story_id = $stateParams['id'];
   $scope.new_login = new Login();
   
   $scope.send_login = function() {
     authenticationService.then(function(service) {
-      service.sign_in($scope.new_login);
+      var redirect_to = $stateParams['redirect_to'];
+      service.sign_in($scope.new_login, redirect_to);
     });
   };
 

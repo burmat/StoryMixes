@@ -41,6 +41,13 @@ angular.module( 'user', ['ngResource'] )
             current_user: function() {
                 // return the current_user object, or handle if the user is not signed in
                 return current_user;
+            },
+            require_logged_in: function(redirect_to) {
+                if (current_user) {
+                    return true;
+                }
+                $location.path('/login?redirect_to' + redirect_to);
+                return false;
             }
         };
     };
