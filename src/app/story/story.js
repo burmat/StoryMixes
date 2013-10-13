@@ -33,7 +33,7 @@ angular.module( 'ngBoilerplate.story', [
         templateUrl: 'story/story.tpl.html'
       }
     },
-    data:{ pageTitle: 'This here. My Story' }
+    data:{ pageTitle: 'Create Story' }
   });
 })
 
@@ -86,6 +86,7 @@ angular.module( 'ngBoilerplate.story', [
     $scope.breadcrumb_trail = [
       $scope.current_page
     ];
+    $rootScope.title = $scope.story.title;
   } else {
     $scope.new_story = new Story();
     $scope.new_page = new Page(); 

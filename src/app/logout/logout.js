@@ -32,7 +32,7 @@ angular.module( 'ngBoilerplate.logout', [
         templateUrl: 'logout/logout.tpl.html'
       }
     },
-    data:{ pageTitle: 'Logout from StoryMixes' }
+    data:{ pageTitle: 'Logout' }
   });
 })
 

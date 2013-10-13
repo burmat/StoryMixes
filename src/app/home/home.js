@@ -14,7 +14,8 @@
  */
 angular.module( 'ngBoilerplate.home', [
   'ui.state',
-  'plusOne'
+  'plusOne',
+  'user'
 ])
 
 /**
@@ -35,9 +36,21 @@ angular.module( 'ngBoilerplate.home', [
   });
 })
 
+.factory( 'Stories', function($resource) {
+  var resource = $resource('http://storymixes.com/api/getstories.php', {}, {
+    get_by_date: {
+        method : 'GET',
+        isArray: true,
+        params: { search_by: 'date' }
+    }
+  } );
+  return resource;
+})
+
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'HomeCtrl', function HomeController( $scope ) {
-  $scope.quantity = 4;
+.controller( 'HomeCtrl', function HomeController( $scope, Stories ) {
+  $scope.quantity = 3;
+  $scope.stories = Stories.get_by_date();
 });
