@@ -132,28 +132,31 @@ h2 {
       display: table-cell;
       width: 1%;
       float: none;
+      
+      &.active {
+        a {
+          background: none;
+          color: @page_bg;
+          border-bottom: 5px solid;
+          padding: 17px;
+          &:hover {
+            background: none;
+            color: @display_bg;
+            
+          }
+        }
+      }
 
       a {
         font-size: 1.6em;
         text-align: center;
         color: #fff;
         text-shadow: none;
-        //border-left: 1px solid rgba(255, 255, 255, 0.75);
-        border-right: 1px solid rgba(0, 0, 0, .1);
         
         &:hover {
+          background: none;
           color: @accent;
         }
-      }
-      
-      &:first-child a {
-        border-left: 0;
-        border-radius: 3px 0 0 3px;
-      }
-      
-      &:last-child a {
-        border-right: 0;
-        border-radius: 3px 0 0 3px;
       }
     }
   }
