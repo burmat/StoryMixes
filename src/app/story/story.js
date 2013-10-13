@@ -34,16 +34,6 @@ angular.module( 'ngBoilerplate.story', [
     },
     data:{ pageTitle: 'This here. My Story' }
   });
-  $stateProvider.state( 'story.detail', {
-    url: '/story/:id',
-    views: {
-      "main": {
-        controller: 'StoryCtrl',
-        templateUrl: 'story/story.tpl.html'
-      }
-    },
-    data:{ pageTitle: 'This here. My Story' }
-  });
 })
 
 
@@ -80,9 +70,9 @@ angular.module( 'ngBoilerplate.story', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'StoryCtrl', function StoryCtrl( $scope, $stateParams, User, Story, Page ) {
-  $scope.params = $stateParams;
-  console.log($scope.params);
+.controller( 'StoryCtrl', function StoryCtrl( $scope, User, Story, Page ) {
+  // $scope.params = $stateParams;
+  // console.log($scope.params);
   var children = [
     {
       id:1,
@@ -138,9 +128,11 @@ angular.module( 'ngBoilerplate.story', [
     $scope.current_page
   ];
   
-  $scope.goto_child = function(child){
-    //Go to the child page.
-    console.log(child);
+  $scope.push_child = function(child){
+    $scope.breadcrumb_trail.push(child);
+    $scope.current_page = child;
+    $scope.current_page_children = [];
+    $scope.current_page_children = Page.children({story_id: 1, page_id: child.id});
   };
   
   $scope.mix = function(page){

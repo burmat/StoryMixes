@@ -3,7 +3,7 @@
 
 <div ng-repeat="page in breadcrumb_trail" class="row">
   <div class="span8 offset2 page">
-    {{ current_page.text }}
+    {{ page.text }}
   </div>
   <div class="span2">
     <ul class="actions">
@@ -15,7 +15,7 @@
   <div class="span8 offset2">
     <ul class="children_pages">
     	<li ng-repeat="child_page in current_page_children">
-    		<a ng-click="goto_child(child_page)">{{ child_page.teaser() }}</a>
+    		<a ng-click="push_child(child_page)">{{ child_page.teaser() }}</a>
     	</li>
     </ul>
     <a class="btn right"><span class="entypo">&#8627;</span> mix this</a></a>
